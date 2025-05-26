@@ -1,31 +1,40 @@
-import React from 'react'
-import Link from 'next/link'
+import React from 'react';
+import Navlink from './NavLink';
+import Image from "next/image";
 
 const NavBar = () => {
-  return (
-    <div className='w-full h-[60px] bg-[hsl(220,16%,96%)] flex px-16 justify-between items-center'>
-      <figure className='w-1/4 h-full flex justify-start items-center'>
-        {/* <img src="" alt="" /> */}
-        <h1>FoodWars</h1>
-      </figure>
+    return (
+        <div className={`flex flex-col`}>
+            <span className={`w-full h-[15px] bg-yellow-300`}></span>
 
-      <ul className='w-2/3 h-full flex justify-evenly items-center'>
-        <li>
-            <Link href="/Home">Home</Link>
-        </li>
-        <li>
-            <Link href="/Recipe">Food Recipe</Link>
-        </li>
-        <li>
-            <Link href="/Cart">Cart</Link>
-        </li>
-      </ul>
+            <div className={`w-full h-2/12 bg-white flex items-center justify-between px-8 py-2 `}>
+                <figure className={`flex items-center w-1/5 `}>
+                    <Image src={`/nav_logo_1.png`} alt="logo" width={50} height={50}/>
+                    <figcaption className={`text-xl text-gray-400 font-light`}>
+                        FOOD WARS
+                    </figcaption>
+                </figure>
 
-      <form action="" className='w-1/3 h-full flex justify-center items-center'>
-        <input type="text" placeholder='Search over 1,000 recipes'/>
-      </form>
-    </div>
-  )
-}
+                <ul className={`flex items-center justify-around text-xl font-semibold w-2/5`}>
+                    <li>
+                        <Navlink href={`/Home`}>Home</Navlink>
+                    </li>
+                    <li>
+                        <Navlink href={`/Revenues`}>Revenues</Navlink>
+                    </li>
+                    <li>
+                        <Navlink href={`/About`}>About Us</Navlink>
+                    </li>
 
-export default NavBar
+                </ul>
+
+                <form className={`w-1/4 h-9/10 flex bg-gray-200 rounded-lg p-2`}>
+                    <Image src={`/images/search_Icon.svg`} alt="search" width={20} height={20}/>
+                    <input type="text" className={`w-full h-full focus:outline-none ml-1.5`} placeholder={`Search For Over 1,000,000 Recipes`}/>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default NavBar;
