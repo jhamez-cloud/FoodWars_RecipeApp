@@ -2,6 +2,7 @@
 import NavBar from "@/app/Components/NavBar";
 import Banner from "@/app/Components/Banner";
 import Hero from "@/app/Components/Hero";
+import Footer from "@/app/Components/Footer";
 
 const page = () => {
   return (
@@ -9,6 +10,7 @@ const page = () => {
         <NavBar />
         <Banner/>
         <Hero/>
+        <Footer/>
     </div>
   )
 }
