@@ -13,16 +13,21 @@ const NavBar = () => {
         throw new Error(`useContext must be used within a Provider with a value`);
     }
 
-    const { search,setSearch } = context;
+    const { search,setSearch,setResults,results } = context;
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault(); // ✅ Prevent default form behavior
 
         const inputValue = inputRef.current?.value || "";
         setSearch(inputValue); // ✅ Save to global context
         console.log(search);
-        //router.push(`/Recipe?search=${encodeURIComponent(inputValue)}`); // ✅ Use input value directly
+
+        const res = await fetch(`/api/recipes/${inputValue}`);
+        const data = await res.json();
+        setResults(data.recipes);
+        console.log(results);
+
     };
 
     return (

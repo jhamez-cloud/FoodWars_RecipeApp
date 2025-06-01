@@ -14,6 +14,10 @@ const Page = () => {
         throw new Error(`useContext must be used within a Provider with a value`);
     }
 
+    //const {search} = context;
+
+
+
     return (
         <div className={`w-full h-full`}>
             <NavBar/>
