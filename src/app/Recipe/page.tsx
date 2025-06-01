@@ -1,10 +1,19 @@
-import React from 'react';
+"use client";
+
 import NavBar from "@/app/Components/NavBar";
 import Banner from "@/app/Components/Banner";
 import Footer from "@/app/Components/Footer";
 import Carousel from "@/app/Components/Carousel";
+import {StateContext} from "@/Context/StateContext";
+import {useContext} from "react";
 
 const Page = () => {
+
+    const context = useContext(StateContext);
+    if (!context) {
+        throw new Error(`useContext must be used within a Provider with a value`);
+    }
+
     return (
         <div className={`w-full h-full`}>
             <NavBar/>
@@ -16,6 +25,13 @@ const Page = () => {
 
                 <section id={`recipe_directions`} className={`w-full h-auto`}>
                     <h1 className={`text-2xl font-semibold my-4`}>Selected Recipe</h1>
+                    <div className={`w-full h-auto`}>
+                        <div>
+                            <ul>
+
+                            </ul>
+                        </div>
+                    </div>
                 </section>
             </main>
             <Footer/>
