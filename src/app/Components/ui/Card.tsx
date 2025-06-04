@@ -7,18 +7,24 @@ interface  CardProps {
     title:string;
     text:string;
     width:string;
+    height:string;
+    imageHeight:string;
+    //imageWidth:string;
 }
 
 const Card = (props:CardProps) => {
 
+    const widthClass = props.width ? `w-[${props.width}]` : "w-full";
+    const heightClass = props.height ? `h-[${props.height}]` : "h-auto";
+    const imageHeightClass = props.imageHeight ? `h-[${props.imageHeight}]` : "h-auto";
 
     return (
-        <div className={`w-${props.width} h-9/10 bg-gray-200`}>
-            <img src={props.image} alt={props.title} width={300} height={200} className={`w-full`}/>
-            <div className={`h-2/5 p-4 flex flex-col justify-around`}>
-                <h1 className={`text-2xl font-semibold`}>{props.title}</h1>
+        <div className={`${widthClass} ${heightClass} bg-gray-200`}>
+            <img src={props.image} alt={props.title} className={`w-full ${imageHeightClass}`} />
+            <div className="h-2/5 p-4 pb-0 flex flex-col justify-around">
+                <h1 className="text-2xl font-semibold">{props.title}</h1>
                 <p>{props.text}</p>
-                <SearchButton text={`Search Recipe`}/>
+                <SearchButton text="Search Recipe" />
             </div>
         </div>
     );

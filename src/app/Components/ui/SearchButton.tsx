@@ -5,7 +5,7 @@ interface SearchButtonProps {
 
 const SearchButton = (props:SearchButtonProps) => {
     return (
-        <button className={`bg-yellow-300 text-black text-sm p-2 rounded-md`}>
+        <button className={`bg-yellow-300 text-black text-sm p-2 rounded-md hover:cursor-pointer`}>
             {props.text}
         </button>
     );
