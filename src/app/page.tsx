@@ -29,29 +29,43 @@ const Page = () => {
         <NavBar />
         <Banner/>
         <Hero/>
-        
-        <Content element={
-            <div className="w-full h-auto p-4 px-8 bg-gray-100">
-                <ul className="w-full h-full list-none grid grid-cols-[repeat(4,_24%)] grid-rows-[repeat(3,_380px)] gap-4">
-                    {currentRecipes.map((recipe) => (
-                        <li key={recipe.recipe_id} className="h-full w-full bg-white rounded shadow-md overflow-hidden flex flex-col justify-between">
+
+        <Content
+            element={
+                <div className="w-full h-auto p-4 px-8 bg-gray-100">
+                    {currentRecipes.length === 0 ? (
+                        <div className="w-full h-[1200px] flex flex-col items-center justify-center text-gray-500">
                             <img
-                                src={recipe.image_url}
-                                alt={recipe.title}
-                                className="w-full h-[170px] object-cover"
+                                src="/no_search.jpg"
+                                alt="No results"
                             />
-                            <div className="flex-1 p-2 flex flex-col justify-evenly bg-gray-200">
-                                <h1 className="text-lg font-medium ">{recipe.title}</h1>
-                                <p className="text-sm text-gray-600">{recipe.publisher}</p>
-                                <button className="mt-2 px-4 py-2 bg-yellow-300 text-black text-sm rounded hover:bg-yellow-400 hover:cursor-pointer">
-                                    Search Recipe
-                                </button>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        }
+                            <p className="text-2xl font-bold text-red-600">No recipes found. Try a different search.</p>
+                        </div>
+                    ) : (
+                        <ul className="w-full h-full list-none grid grid-cols-[repeat(4,_24%)] grid-rows-[repeat(3,_380px)] gap-4">
+                            {currentRecipes.map((recipe) => (
+                                <li
+                                    key={recipe.recipe_id}
+                                    className="h-full w-full bg-white rounded shadow-md overflow-hidden flex flex-col justify-between"
+                                >
+                                    <img
+                                        src={recipe.image_url}
+                                        alt={recipe.title}
+                                        className="w-full h-[170px] object-cover"
+                                    />
+                                    <div className="flex-1 p-2 flex flex-col justify-evenly bg-gray-200">
+                                        <h1 className="text-lg font-medium">{recipe.title}</h1>
+                                        <p className="text-sm text-gray-600">{recipe.publisher}</p>
+                                        <button className="mt-2 px-4 py-2 bg-yellow-300 text-black text-sm rounded hover:bg-yellow-400 hover:cursor-pointer">
+                                            Search Recipe
+                                        </button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            }
         />
         {/*Pagination here instead*/}
         <div className="w-full flex justify-center px-8 pr-10 py-2">
