@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
             },
         ];
     },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'http',
+                hostname: 'forkify-api.herokuapp.com',
+                pathname: '/images/**',
+            },
+        ],
+    },
 };
 
 export default nextConfig;

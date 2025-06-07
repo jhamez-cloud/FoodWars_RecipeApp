@@ -4,9 +4,9 @@ import Banner from "@/app/Components/Banner";
 import Hero from "@/app/Components/Hero";
 import Content from "./Components/Content";
 import Footer from "@/app/Components/Footer";
-import Card from "@/app/Components/ui/Card";
-import {useContext} from "react";
+import {useContext,useState} from "react";
 import {StateContext} from "@/Context/StateContext";
+import {Recipe} from "@/Context/types/recipeType";
 
 const Page = () => {
 
@@ -15,21 +15,14 @@ const Page = () => {
         throw new Error(`useContext must be used within a Provider with a value`);
     }
     const {results} = context;
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const reduceTitle = (title:string,limit:number = 17)=>{
-        const newTitle:string[] = [];
-        if(title.length > limit){
-            title.split(' ').reduce((acc,cur)=>{
-                if(acc + cur.length <= limit){
-                    newTitle.push(cur);
-                }
-                return acc + cur.length
-            },0);
+    const recipesPerPage = 12;
 
-            return `${newTitle.join(' ')}...`;
-        }
-        return title;
-    }
+    const totalPages:number    = Math.ceil(results.length / recipesPerPage);
+    const startIndex:number = (currentPage - 1) * recipesPerPage;
+    const endIndex:number = startIndex + recipesPerPage;
+    const currentRecipes:Recipe[] = results.slice(startIndex, endIndex);
 
   return (
     <div className={`w-full h-screen relative`}>
@@ -38,26 +31,47 @@ const Page = () => {
         <Hero/>
         
         <Content element={
-            <div className="w-full h-full p-4 bg-gray-50">
-                <ul className="list-none grid grid-cols-4 auto-rows-[370px] gap-4">
-                    {results.map((recipe) => (
-                        <li key={recipe.recipe_id} className={`h-11/12 overflow-hidden `} >
-                            <Card
-                                image={recipe.image_url}
-                                title={reduceTitle(recipe.title)}
-                                text={recipe.publisher}
-                                width="90%"        // results in w-[80%]
-                                height="70%"       // h-[70%]
-                                imageHeight="50%"  // h-[50%]
+            <div className="w-full h-auto p-4 px-8 bg-gray-100">
+                <ul className="w-full h-full list-none grid grid-cols-[repeat(4,_24%)] grid-rows-[repeat(3,_380px)] gap-4">
+                    {currentRecipes.map((recipe) => (
+                        <li key={recipe.recipe_id} className="h-full w-full bg-white rounded shadow-md overflow-hidden flex flex-col justify-between">
+                            <img
+                                src={recipe.image_url}
+                                alt={recipe.title}
+                                className="w-full h-[170px] object-cover"
                             />
+                            <div className="flex-1 p-2 flex flex-col justify-evenly bg-gray-200">
+                                <h1 className="text-lg font-medium ">{recipe.title}</h1>
+                                <p className="text-sm text-gray-600">{recipe.publisher}</p>
+                                <button className="mt-2 px-4 py-2 bg-yellow-300 text-black text-sm rounded hover:bg-yellow-400 hover:cursor-pointer">
+                                    Search Recipe
+                                </button>
+                            </div>
                         </li>
                     ))}
                 </ul>
             </div>
-
         }
         />
-        
+        {/*Pagination here instead*/}
+        <div className="w-full flex justify-center px-8 pr-10 py-2">
+            {currentPage > 1 && (
+                <button
+                    onClick={() => setCurrentPage(currentPage - 1)}
+                    className="w-[100px] h-[50px] m-2 bg-yellow-300 rounded-sm text-xl text-white font-bold"
+                >
+                    ‹‹ Prev
+                </button>
+            )}
+            {currentPage < totalPages && (
+                <button
+                    onClick={() => setCurrentPage(currentPage + 1)}
+                    className="w-[100px] h-[50px] m-2 bg-yellow-300 rounded-sm text-xl text-white font-bold"
+                >
+                    Next ››
+                </button>
+            )}
+        </div>
         <Footer/>
     </div>
   )

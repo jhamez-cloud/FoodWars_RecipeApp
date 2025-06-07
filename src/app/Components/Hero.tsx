@@ -14,7 +14,7 @@ const Hero = () => {
                    image="/images/waffleCard.png"
                    width="25%"          // w-[25%]
                    height="72%"         // h-[90%]
-                   imageHeight="140px"  // h-[130px]
+                   //imageHeight="140px"  // h-[130px]
                />
 
                <Card
@@ -23,7 +23,7 @@ const Hero = () => {
                    image="/images/pancakeCard.png"
                    width="25%"
                    height="72%"
-                   imageHeight="140px"
+                  // imageHeight="140px"
                />
 
                <Card
@@ -32,7 +32,7 @@ const Hero = () => {
                    image="/images/chocolateCard.png"
                    width="25%"
                    height="72%"
-                   imageHeight="140px"
+                   //imageHeight="140px"
                />
 
            </div>
