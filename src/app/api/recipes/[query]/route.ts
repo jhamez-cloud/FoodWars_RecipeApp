@@ -9,21 +9,5 @@ export const GET = async (req : NextRequest,{params}) => {
     const response = await fetch(`https://forkify-api.herokuapp.com/api/search?q=${query}`)
     const data = await response.json();
 
-    if (data.error) {
-        return new Response(
-            JSON.stringify({ results: [], message: data.error }),
-            {
-                status: 200,
-                headers: { 'content-type': 'application/json' }
-            }
-        );
-    }
-
-    return new Response(
-        JSON.stringify({ results: data.recipes || [] }),
-        {
-            status: 200,
-            headers: { 'content-type': 'application/json' }
-        }
-    );
+    return new Response(JSON.stringify(data),{status: 200, headers:{'content-type': 'application/json'}});
 }

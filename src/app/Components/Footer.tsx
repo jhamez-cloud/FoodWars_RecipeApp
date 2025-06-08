@@ -46,7 +46,7 @@ const Footer = () => {
             </div>
 
             <div>
-                <p>Copyright © 2021 Food Wars. All Rights Reserved.</p>
+                <p>Copyright © 2025 Food Wars. All Rights Reserved.</p>
                 <p className={`font-light text-gray-400`}><a className={`text-blue-500`} href="mailto:jameskekeli12@gmail.com">jameskekeli12@gmail.com</a></p>
                 <p>Powered By <em className={`text-blue-500 font-semibold`}>Forkify API</em></p>
             </div>

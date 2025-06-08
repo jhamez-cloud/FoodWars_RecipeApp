@@ -20,10 +20,10 @@ const Page = () => {
 
     return (
         <div className={`w-full h-full`}>
-            <NavBar/>
+            <NavBar displaySearch={'hidden'} displayAddRecipe={`flex`}/>
             <Banner/>
             <main className={`w-full min-h-[500px] flex flex-col justify-center items-center px-8`}>
-                <section id={`recipe_carousel`} className={`w-full h-9/10 rounded-lg`}>
+                <section id={`recipe_carousel`} className={`w-full h-[80%] rounded-lg bg-gray-200`}>
                     <Carousel/>
                 </section>
 

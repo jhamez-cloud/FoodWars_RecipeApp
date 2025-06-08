@@ -19,27 +19,28 @@ const Page = () => {
 
     const recipesPerPage = 12;
 
-    const totalPages:number    = Math.ceil(results.length / recipesPerPage);
+    const totalPages:number    = Math.ceil(results?.length / recipesPerPage);
     const startIndex:number = (currentPage - 1) * recipesPerPage;
     const endIndex:number = startIndex + recipesPerPage;
-    const currentRecipes:Recipe[] = results.slice(startIndex, endIndex);
+    const currentRecipes:Recipe[] = results?.slice(startIndex, endIndex) || [];
 
   return (
     <div className={`w-full h-screen relative`}>
-        <NavBar />
+        <NavBar displaySearch={'flex'} displayAddRecipe={`hidden`}/>
         <Banner/>
         <Hero/>
 
         <Content
             element={
-                <div className="w-full h-auto p-4 px-8 bg-gray-100">
+                <div className="w-full h-auto p-4 px-8 bg-white">
                     {currentRecipes.length === 0 ? (
-                        <div className="w-full h-[1200px] flex flex-col items-center justify-center text-gray-500">
+                        <div className="w-full h-[500px] flex flex-col items-center justify-center text-gray-500">
                             <img
                                 src="/no_search.jpg"
                                 alt="No results"
                             />
                             <p className="text-2xl font-bold text-red-600">No recipes found. Try a different search.</p>
+                            <p className={`text-gray-400 font-light`}>You either made a wrong,invalid or a typo in your search. Or Recipe doesnt exist in our database yet.</p>
                         </div>
                     ) : (
                         <ul className="w-full h-full list-none grid grid-cols-[repeat(4,_24%)] grid-rows-[repeat(3,_380px)] gap-4">
@@ -72,7 +73,7 @@ const Page = () => {
             {currentPage > 1 && (
                 <button
                     onClick={() => setCurrentPage(currentPage - 1)}
-                    className="w-[100px] h-[50px] m-2 bg-yellow-300 rounded-sm text-xl text-white font-bold"
+                    className="w-[100px] h-[50px] m-2 bg-yellow-300 rounded-sm text-xl text-white font-bold hover:cursor-pointer"
                 >
                     ‹‹ Prev
                 </button>
@@ -80,7 +81,7 @@ const Page = () => {
             {currentPage < totalPages && (
                 <button
                     onClick={() => setCurrentPage(currentPage + 1)}
-                    className="w-[100px] h-[50px] m-2 bg-yellow-300 rounded-sm text-xl text-white font-bold"
+                    className="w-[100px] h-[50px] m-2 bg-yellow-300 rounded-sm text-xl text-white font-bold hover:cursor-pointer"
                 >
                     Next ››
                 </button>

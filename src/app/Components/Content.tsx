@@ -6,7 +6,7 @@ interface child {
 
 const ContentPage = (props:child) => {
     return (
-        <div className={`w-full h-[1200px]`}>
+        <div className={`w-full min-h-[500px]`}>
             {props.element}
         </div>
     );

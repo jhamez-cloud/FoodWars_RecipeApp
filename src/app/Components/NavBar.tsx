@@ -4,9 +4,14 @@ import React, { useContext, useRef } from "react";
 import Navlink from "./NavLink";
 import Image from "next/image";
 import { StateContext } from "@/Context/StateContext";
-//import { useRouter } from "next/navigation"; // ✅ use next/navigation in app router
+//import { useRouter } from "next/navigation";
 
-const NavBar = () => {
+interface displayProps{
+    displaySearch:string;
+    displayAddRecipe:string;
+}
+
+const NavBar = (props:displayProps) => {
     //const router = useRouter();
     const context = useContext(StateContext);
     if (!context) {
@@ -17,11 +22,11 @@ const NavBar = () => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault(); // ✅ Prevent default form behavior
+        e.preventDefault();
 
         const inputValue = inputRef.current?.value || "";
-        setSearch(inputValue); // ✅ Save to global context
-        console.log(search);
+        setSearch(inputValue);
+        //console.log(search);
 
         const res = await fetch(`/api/recipes/${inputValue}`);
         const data = await res.json();
@@ -48,7 +53,7 @@ const NavBar = () => {
                     <li><Navlink href={`/About`}>About Us</Navlink></li>
                 </ul>
 
-                <form onSubmit={handleSubmit} className={`w-1/4 h-3/5 flex bg-gray-200 rounded-lg p-2`}>
+                <form onSubmit={handleSubmit} className={`w-1/4 h-3/5 ${props.displaySearch} bg-gray-200 rounded-lg p-2 `}>
                     <button type="submit">
                         <Image src={`/images/search_Icon.svg`} alt="search" width={20} height={20} />
                     </button>
@@ -59,6 +64,12 @@ const NavBar = () => {
                         placeholder={`Search For Over 1,000,000 Recipes`}
                     />
                 </form>
+                <div className={`w-1/4 h-3/5 ${props.displayAddRecipe} justify-center items-center bg-yellow-300 rounded-lg text-lg p-2 font-normal`}>
+                    <button className={`w-full h-full hover:cursor-pointer p-4 flex justify-around items-center`}>
+                        <img src="/plus_icon.png" alt=""/>
+                        Support Project | Add Your Recipe
+                    </button>
+                </div>
             </div>
         </div>
     );
