@@ -1,9 +1,11 @@
-import {Recipe} from "@/Context/types/recipeType";
+import {Recipes,Recipe} from "@/Context/types/recipeType";
 import React from "react";
 
 export interface setContextType {
     search: string;
     setSearch: React.Dispatch<React.SetStateAction<string>>;
-    results:Recipe[];
-    setResults: React.Dispatch<React.SetStateAction<Recipe[]>>;
+    results:Recipes[];
+    setResults: React.Dispatch<React.SetStateAction<Recipes[]>>;
+    recipeData:Recipe | undefined;
+    setRecipeData: React.Dispatch<React.SetStateAction<Recipe | undefined>>;
 }

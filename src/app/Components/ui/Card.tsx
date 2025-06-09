@@ -21,7 +21,7 @@ const Card = (props:CardProps) => {
 
     return (
         <div className={`${widthClass} ${heightClass} bg-gray-200`}>
-            <Image src={props.image} alt={props.title} width={`364`} height={`152`}/>
+            <img src={props.image} alt={props.title} className={`w-full h-1/2`}/>
             <div className="h-2/5 p-4 pb-0 flex flex-col justify-around">
                 <h1 className="text-2xl font-semibold">{props.title}</h1>
                 <p>{props.text}</p>

@@ -9,27 +9,27 @@ const Hero = () => {
            </h1>
            <div className={`w-full h-3/5 flex justify-around p-8 pb-4`}>
                <Card
-                   title="Waffles"
+                   title="Pizza"
                    text="Cool recipe to eat with friends in the morning."
-                   image="/images/waffleCard.png"
+                   image="/images/pizzaCard.jpg"
                    width="25%"          // w-[25%]
                    height="72%"         // h-[90%]
                    //imageHeight="140px"  // h-[130px]
                />
 
                <Card
-                   title="Pancakes"
+                   title="Pasta"
                    text="Cool recipe to eat with friends in the morning."
-                   image="/images/pancakeCard.png"
+                   image="/images/pastaCard.png"
                    width="25%"
                    height="72%"
                   // imageHeight="140px"
                />
 
                <Card
-                   title="Hot Chocolate"
+                   title="Chocolate"
                    text="Cool recipe to eat with friends in the morning."
-                   image="/images/chocolateCard.png"
+                   image="/images/chocolateCard.webp"
                    width="25%"
                    height="72%"
                    //imageHeight="140px"

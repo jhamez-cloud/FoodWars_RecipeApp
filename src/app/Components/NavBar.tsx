@@ -30,13 +30,14 @@ const NavBar = (props:displayProps) => {
 
         const res = await fetch(`/api/recipes/${inputValue}`);
         const data = await res.json();
+        console.log(data);
         setResults(data.recipes);
         console.log(results);
 
     };
 
     return (
-        <div className={`flex flex-col w-full h-24 fixed top-0 shadow-2xl`}>
+        <div className={`flex flex-col w-full h-24 fixed top-0 shadow-2xl z-50`}>
             <span className={`w-full h-[15px] bg-yellow-300`}></span>
 
             <div className={`w-full h-full bg-white flex items-center justify-between px-8 py-2 `}>
@@ -64,7 +65,7 @@ const NavBar = (props:displayProps) => {
                         placeholder={`Search For Over 1,000,000 Recipes`}
                     />
                 </form>
-                <div className={`w-1/4 h-3/5 ${props.displayAddRecipe} justify-center items-center bg-yellow-300 rounded-lg text-lg p-2 font-normal`}>
+                <div className={`w-1/4 h-3/5 ${props.displayAddRecipe} justify-center items-center bg-yellow-300 rounded-lg p-2`}>
                     <button className={`w-full h-full hover:cursor-pointer p-4 flex justify-around items-center`}>
                         <img src="/plus_icon.png" alt=""/>
                         Support Project | Add Your Recipe
