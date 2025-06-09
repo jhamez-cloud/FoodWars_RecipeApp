@@ -5,8 +5,8 @@ import Hero from "@/app/Components/Hero";
 import Content from "./Components/Content";
 import Footer from "@/app/Components/Footer";
 import {useContext,useState} from "react";
+import {useRouter} from "next/navigation";
 import {StateContext} from "@/Context/StateContext";
-import Link from "next/link";
 import {Recipes} from "@/Context/types/recipeType";
 
 const Page = () => {
@@ -25,12 +25,14 @@ const Page = () => {
     const endIndex:number = startIndex + recipesPerPage;
     const currentRecipes:Recipes[] = results?.slice(startIndex, endIndex) || [];
 
+    const router = useRouter();
 
     const handleClick = async (id:number) =>{
         const res = await fetch(`/api/recipe/${id}`);
         const data = await res.json();
         setRecipeData(data.recipe);
 
+        router.push("/Recipe");
         //console.log(recipeData);
     }
 
@@ -71,7 +73,7 @@ const Page = () => {
                                             className="mt-2 px-4 py-2 bg-yellow-300 text-black text-sm rounded hover:bg-yellow-400 hover:cursor-pointer"
                                             onClick={()=>handleClick(recipe.recipe_id)}
                                         >
-                                           <Link href={`/Recipe`}> Search Recipe</Link>
+                                            Search Recipe
                                         </button>
                                     </div>
                                 </li>

@@ -119,44 +119,54 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({
     };
 
     return (
-        <div className="relative h-[400px] w-full overflow-hidden z-0 ">
+        <div className="relative h-[400px] w-full overflow-hidden z-0">
+            <div className="flex h-full">
+                {/* Cylinder Animation Section (60%) */}
+                <div className="w-[60%] flex items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
+                    <motion.div
+                        drag="x"
+                        dragElastic={0}
+                        onDrag={handleDrag}
+                        onDragEnd={handleDragEnd}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        animate={controls}
+                        onUpdate={handleUpdate}
+                        style={{
+                            transform: transform,
+                            rotateY: rotation,
+                            width: cylinderWidth,
+                            transformStyle: "preserve-3d",
+                        }}
+                        className="flex min-h-full cursor-grab items-center justify-center [transform-style:preserve-3d]"
+                    >
+                        {galleryImages.map((url, i) => (
+                            <div
+                                key={i}
+                                className="group absolute flex items-center justify-center [backface-visibility:hidden] md:p-[2%]"
+                                style={{
+                                    width: `${faceWidth * 0.7}px`, // smaller width
+                                    height: '250px', // smaller height
+                                    transform: `rotateY(${(360 / faceCount) * i}deg) translateZ(${radius}px)`,
+                                }}
+                            >
+                                <img
+                                    src={url}
+                                    alt="gallery"
+                                    className="pointer-events-none w-full h-full object-cover rounded-xl border-2 border-white shadow-lg transition-transform duration-300 group-hover:scale-105"
+                                />
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
 
-            <div className="flex h-full items-center justify-center [perspective:1000px] [transform-style:preserve-3d]">
-                <motion.div
-                    drag="x"
-                    dragElastic={0}
-                    onDrag={handleDrag}
-                    onDragEnd={handleDragEnd}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    animate={controls}
-                    onUpdate={handleUpdate}
-                    style={{
-                        transform: transform,
-                        rotateY: rotation,
-                        width: cylinderWidth,
-                        transformStyle: "preserve-3d",
-                    }}
-                    className="flex min-h-full cursor-grab items-center justify-center [transform-style:preserve-3d]"
-                >
-                    {galleryImages.map((url, i) => (
-                        <div
-                            key={i}
-                            className="group absolute flex h-full items-center justify-center [backface-visibility:hidden] md:p-[6%]"
-                            style={{
-                                width: `${faceWidth}px`,
-                                transform: `rotateY(${(360 / faceCount) * i}deg) translateZ(${radius}px)`,
-                            }}
-                        >
-                            <img
-                                src={url}
-                                alt="gallery"
-                                className="pointer-events-none w-full h-full rounded-[15px] border-[3px] border-white object-cover transition-transform duration-300 ease-out group-hover:scale-105"
-                            />
-
-                        </div>
-                    ))}
-                </motion.div>
+                {/* Text Section (40%) */}
+                <div className="w-[40%] flex flex-col justify-center px-10 text-left">
+                    <h2 className="text-3xl font-extrabold mb-3 text-gray-800 drop-shadow-sm">Explore Our Gallery</h2>
+                    <p className="text-base text-gray-600 leading-relaxed">
+                        Discover a rotating cylinder of flavor-packed images. Drag to interact or sit back and enjoy the spin.
+                    </p>
+                </div>
             </div>
         </div>
     );
