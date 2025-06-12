@@ -4,9 +4,9 @@ interface child {
     element: React.ReactNode;
 }
 
-const ContentPage = (props:child) => {
+const ContentPage = (props: child) => {
     return (
-        <div className={`w-full min-h-[500px]`}>
+        <div className={`w-full min-h-[400px]`}>
             {props.element}
         </div>
     );

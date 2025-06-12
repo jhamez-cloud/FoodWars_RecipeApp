@@ -4,6 +4,7 @@ import NavBar from "@/app/Components/NavBar";
 import Banner from "@/app/Components/Banner";
 import Footer from "@/app/Components/Footer";
 import Carousel from "@/app/Components/Carousel";
+import Link from "next/link";
 import {StateContext} from "@/Context/StateContext";
 import {useContext} from "react";
 
@@ -68,7 +69,7 @@ const Page = () => {
                                         alt="No results"
                                     />
                                     <p className="text-2xl font-bold text-red-600">No recipe search has been made.</p>
-                                    <p className={`text-gray-400 font-light`}>Go to Home page to search for a recipe.</p>
+                                    <p className={`text-gray-400 font-light`}>Go to <Link href={`/`} className={`text-yellow-300 text-shadow-sm underline`}>Home</Link> page to search for a recipe.</p>
                                 </div>
                             )}
                         </div>

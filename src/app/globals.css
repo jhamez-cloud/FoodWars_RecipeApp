@@ -5,3 +5,40 @@ body {
   width:100%;
   height:100vh;
 }
+
+@keyframes spin  {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes borderShift {
+  0% {
+    border-top-color: #fcd34d; /* yellow-300 */
+    border-right-color: transparent;
+    border-bottom-color: #fcd34d;
+    border-left-color: transparent;
+  }
+  
+  100% {
+    border-top-color: #fcd34d; /* yellow-300 */
+    border-right-color: transparent;
+    border-bottom-color: #fcd34d;
+    border-left-color: transparent;
+  }
+}
+
+.load{
+  animation: spin 1s linear infinite,borderShift 3s linear infinite;
+}
+
+.content_div{
+  @apply w-full h-full p-4 px-8 bg-white;
+}
+
+.loading_div{
+  @apply w-[70px] h-[70px] border-10 border-white border-t-yellow-300 rounded-full; /*shadow-[0px_0px_10px_rgba(0,0,0,0.5)]*/
+}
+
+
+
+

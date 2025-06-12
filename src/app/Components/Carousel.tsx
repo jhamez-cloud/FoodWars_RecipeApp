@@ -10,10 +10,16 @@ import {
 
 const IMGS:string[] = [
     '/images/cooked-meat-on-plate.jpg',
-    '/images/slide2.jpg',
+    '/images/waffleCard.png',
     '/images/carousel_img_1.avif',
     '/images/slide4.jpg',
+    '/images/slide2.jpg',
     '/images/carousel_img_4.webp',
+    '/images/pizzaCard.jpg',
+    '/images/chocolateCard.png',
+    '/images/pastaCard.png',
+    '/images/pancakeCard.png',
+    '/images/chocolateCard.webp'
 ];
 
 interface RollingGalleryProps {
@@ -162,9 +168,9 @@ const RollingGallery: React.FC<RollingGalleryProps> = ({
 
                 {/* Text Section (40%) */}
                 <div className="w-[40%] flex flex-col justify-center px-10 text-left">
-                    <h2 className="text-3xl font-extrabold mb-3 text-gray-800 drop-shadow-sm">Explore Our Gallery</h2>
+                    <h2 className="text-3xl font-extrabold mb-3 text-gray-800 drop-shadow-sm">Browse Our Gallery</h2>
                     <p className="text-base text-gray-600 leading-relaxed">
-                        Discover a rotating cylinder of flavor-packed images. Drag to interact or sit back and enjoy the spin.
+                        Feast your eyes , explore our gallery , browse through many dishes from different cultures around the globe. Drag the cylinder to interact with this spinning bouquet of recipes.
                     </p>
                 </div>
             </div>

@@ -15,8 +15,9 @@ const Page = () => {
     if (!context) {
         throw new Error(`useContext must be used within a Provider with a value`);
     }
-    const {results,setRecipeData,recipeData} = context;
+    const {results,setRecipeData,loading} = context;
     const [currentPage, setCurrentPage] = useState<number>(1);
+    //const contentRef = useRef(null);
 
     const recipesPerPage = 12;
 
@@ -30,6 +31,7 @@ const Page = () => {
     const handleClick = async (id:number) =>{
         const res = await fetch(`/api/recipe/${id}`);
         const data = await res.json();
+
         setRecipeData(data.recipe);
 
         router.push("/Recipe");
@@ -38,49 +40,56 @@ const Page = () => {
 
   return (
     <div className={`w-full h-screen relative`}>
-        <NavBar displaySearch={'flex'} displayAddRecipe={`hidden`}/>
+        <NavBar displaySearch={'flex'} displayAddRecipe={`hidden`} />
         <Banner/>
         <Hero/>
 
         <Content
             element={
-                <div className="w-full h-auto p-4 px-8 bg-white">
-                    {currentRecipes.length === 0 ? (
-                        <div className="w-full h-[500px] flex flex-col items-center justify-center text-gray-500">
-                            <img
-                                src="/no_search.jpg"
-                                alt="No results"
-                            />
-                            <p className="text-2xl font-bold text-red-600">No recipes found. Try a different search.</p>
-                            <p className={`text-gray-400 font-light`}>You either made a wrong,invalid or a typo in your search. Or Recipe doesnt exist in our database yet.</p>
+                <>
+                    <div className={`${!loading?'content_div':'hidden'}`}>
+                        {currentRecipes.length === 0 && results.length === 0 ? (
+                            <div className="w-full h-[400px] flex flex-col items-center justify-center text-gray-500">
+                                <img
+                                    src="/no_search.jpg"
+                                    alt="No results"
+                                />
+                                <p className="text-2xl font-bold text-red-600">No recipes found. Try a different search.</p>
+                                <p className={`text-gray-400 font-light`}>You either made a wrong,invalid or a typo in your search. Or Recipe doesnt exist in our database yet.</p>
+                            </div>
+                        ) : (
+                            <ul className="w-full h-full list-none grid grid-cols-[repeat(4,_24%)] grid-rows-[repeat(3,_380px)] gap-4" id={`recipeStart`}>
+                                {currentRecipes.map((recipe) => (
+                                    <li
+                                        key={recipe.recipe_id}
+                                        className="h-full w-full bg-white rounded shadow-md overflow-hidden flex flex-col justify-between"
+                                    >
+                                        <img
+                                            src={recipe.image_url}
+                                            alt={recipe.title}
+                                            className="w-full h-[170px] object-cover"
+                                        />
+                                        <div className="flex-1 p-2 flex flex-col justify-evenly bg-gray-200">
+                                            <h1 className="text-lg font-medium">{recipe.title}</h1>
+                                            <p className="text-sm text-gray-600">{recipe.publisher}</p>
+                                            <button
+                                                className="mt-2 px-4 py-2 bg-yellow-300 text-black text-sm rounded hover:bg-yellow-400 hover:cursor-pointer"
+                                                onClick={()=>handleClick(recipe.recipe_id)}
+                                            >
+                                                Search Recipe
+                                            </button>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                    <div className={`${loading?'content_div flex justify-center items-center':'hidden'}`}>
+                        <div className={`loading_div load`}>
+
                         </div>
-                    ) : (
-                        <ul className="w-full h-full list-none grid grid-cols-[repeat(4,_24%)] grid-rows-[repeat(3,_380px)] gap-4" id={`recipeStart`}>
-                            {currentRecipes.map((recipe) => (
-                                <li
-                                    key={recipe.recipe_id}
-                                    className="h-full w-full bg-white rounded shadow-md overflow-hidden flex flex-col justify-between"
-                                >
-                                    <img
-                                        src={recipe.image_url}
-                                        alt={recipe.title}
-                                        className="w-full h-[170px] object-cover"
-                                    />
-                                    <div className="flex-1 p-2 flex flex-col justify-evenly bg-gray-200">
-                                        <h1 className="text-lg font-medium">{recipe.title}</h1>
-                                        <p className="text-sm text-gray-600">{recipe.publisher}</p>
-                                        <button
-                                            className="mt-2 px-4 py-2 bg-yellow-300 text-black text-sm rounded hover:bg-yellow-400 hover:cursor-pointer"
-                                            onClick={()=>handleClick(recipe.recipe_id)}
-                                        >
-                                            Search Recipe
-                                        </button>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
+                    </div>
+                </>
             }
         />
         {/*Pagination here instead*/}

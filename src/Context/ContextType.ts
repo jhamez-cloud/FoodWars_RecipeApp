@@ -8,4 +8,6 @@ export interface setContextType {
     setResults: React.Dispatch<React.SetStateAction<Recipes[]>>;
     recipeData:Recipe | undefined;
     setRecipeData: React.Dispatch<React.SetStateAction<Recipe | undefined>>;
+    loading:boolean;
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }

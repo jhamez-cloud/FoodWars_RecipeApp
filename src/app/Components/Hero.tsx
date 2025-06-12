@@ -12,8 +12,6 @@ const Hero = () => {
                    title="Pizza"
                    text="Cool recipe to eat with friends in the morning."
                    image="/images/pizzaCard.jpg"
-                   width="25%"          // w-[25%]
-                   height="72%"         // h-[90%]
                    //imageHeight="140px"  // h-[130px]
                />
 
@@ -21,22 +19,18 @@ const Hero = () => {
                    title="Pasta"
                    text="Cool recipe to eat with friends in the morning."
                    image="/images/pastaCard.png"
-                   width="25%"
-                   height="72%"
-                  // imageHeight="140px"
+                   // imageHeight="140px"
                />
 
                <Card
                    title="Chocolate"
                    text="Cool recipe to eat with friends in the morning."
                    image="/images/chocolateCard.webp"
-                   width="25%"
-                   height="72%"
                    //imageHeight="140px"
                />
 
            </div>
-           <h1 className={`text-4xl font-bold text-center`}>Search Results:</h1>
+           <h1 className={`text-4xl font-bold text-center mb-4`}>Search Results:</h1>
        </>
     );
 };

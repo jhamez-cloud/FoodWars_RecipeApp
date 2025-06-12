@@ -4,7 +4,7 @@ import React, { useContext, useRef } from "react";
 import Navlink from "./NavLink";
 import Image from "next/image";
 import { StateContext } from "@/Context/StateContext";
-//import { useRouter } from "next/navigation";
+
 
 interface displayProps{
     displaySearch:string;
@@ -18,21 +18,39 @@ const NavBar = (props:displayProps) => {
         throw new Error(`useContext must be used within a Provider with a value`);
     }
 
-    const { search,setSearch,setResults,results } = context;
+    const { setSearch,setResults,setLoading } = context;
     const inputRef = useRef<HTMLInputElement>(null);
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        setLoading(true);
 
         const inputValue = inputRef.current?.value || "";
         setSearch(inputValue);
         //console.log(search);
 
-        const res = await fetch(`/api/recipes/${inputValue}`);
-        const data = await res.json();
-        console.log(data);
-        setResults(data.recipes);
-        console.log(results);
+        try {
+            const res = await fetch(`/api/recipes/${inputValue}`);
+            const data = await res.json();
+
+            setTimeout(() => {
+                if (data?.recipes && data.recipes.length > 0) {
+                    setResults(data.recipes);
+                } else {
+                    setResults([]);
+                }
+                setLoading(false);
+            }, 2000);
+        } catch (error) {
+            console.error("Fetch failed:", error);
+
+            setTimeout(() => {
+                setResults([]);
+                setLoading(false);
+            }, 2000);
+        }
 
     };
 
